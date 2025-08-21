@@ -1,1 +1,49 @@
+Network Intrusion Detection System (IDS)
+Task 4 - Code Alpha Internship
+Prepared by: KUMAIL AHMED
+
+
+Introduction
+IDS (Intrusion Detection System) monitors network traffic.
+ Detects suspicious activity like hacking attempts or port scans.
+ Acts as a security guard for the network.
+
+Tool Used: Snort
+Snort is an open-source IDS.
+ Can analyze live network traffic.
+ Uses rules to detect malicious activity.
+ Logs and alerts when threats are found.
+
+Setup Steps
+1. Install Snort: sudo apt install snort -y
+2. Create/Edit local.rules file.
+3. Add custom rule for Telnet detection.
+4. Run Snort with the rule enabled.
+5. Generate traffic (e.g., Telnet test).
+
+Custom Rule Example
+alert tcp any any -> any 23 (msg:"Telnet Attempt Detected"; sid:1000001;)
+
+Detects any Telnet connection attempt (port 23).
+Triggers an alert with custom message.
+
+
+Example Output
+[**] [1:1000001:0] Telnet Attempt Detected [**]
+
+Testing IDS
+ Run Snort: sudo snort -c /etc/snort/snort.lua -R /etc/snort/rules/local.rules -i wlan0 --alert-fast stdout
+ Open another terminal and run: telnet towel.blinkenlights.nl
+ Snort should display an alert in the console.
+
+
+Conclusion
+ IDS is effective for detecting suspicious activity.
+ Snort successfully detected Telnet traffic.
+Provides better network security through monitoring and alerts.
+
+
+
+
+
 
