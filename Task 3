@@ -1,1 +1,42 @@
+username = input("Enter username: ")
+password = input("Enter password: ")
 
+if username == "user" and password == "1234":
+    print("Login successful")
+else:
+    print("Access denied")
+
+#the above code is simple
+#Problems
+#Hardcoded password → "1234" is written inside the code. Anyone who sees the code knows the password.
+#Weak password → "1234" is easy to guess.
+#No database / secure storage → credentials should be stored safely.
+
+
+
+
+#Strong Version
+
+import hashlib
+
+# Database of users (username + hashed password)
+users = {
+    "user": hashlib.sha256("StrongPassword123!".encode()).hexdigest()
+}
+
+username = input("Enter username: ")
+password = input("Enter password: ")
+
+# Hash the entered password
+hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+if username in users and users[username] == hashed_password:
+    print("Login successful")
+else:
+    print("Access denied")
+
+
+#Fixes
+#Don’t hardcode passwords → store them in a secure database.
+#Hash passwords (so even if hackers steal the database, they can’t read plain-text passwords).
+#Use strong passwords.
